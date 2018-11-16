@@ -13,7 +13,7 @@ sensor:
     feed_url: 'https://www.brainyquote.com/link/quotebr.rss'
     date_format: '%a, %b %d %I:%M %p'
 ```
- 2. Download the [Quote-Day-Card](https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/quote-day.js), [bg.jpg](https://github.com/dnguyen800/Quote-of-the-Day-Card/raw/master/images/bg.jpg) and place the files in your `config/www` folder.
+ 2. Download the [Quote-Day-Card](https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/quote-day-card.js), [bg.jpg](https://github.com/dnguyen800/Quote-of-the-Day-Card/raw/master/images/bg.jpg) and place the files in your `config/www` folder.
  
  3. Add the following to the resources section of your ui-lovelace.yaml
 
