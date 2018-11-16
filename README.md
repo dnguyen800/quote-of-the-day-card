@@ -31,6 +31,13 @@ resources:
 
 5. Restart Home Assistant
  
+## Optional
+To configure custom_updater with button-card
+```yaml
+custom_updater:
+  card_urls:
+    - https://github.com/dnguyen800/Quote-of-the-Day-Card/blob/master/tracker.json
+```
 ## Options
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
