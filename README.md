@@ -49,4 +49,5 @@ custom_updater:
 ## Credits
  - Background image by [Yannick Pulver](https://yannickpulver.com/) via [Unsplash](https://unsplash.com/@yanu)
  - [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) - For doing the hard work
+ - All the Home Assistant custom components and cards out there. I learned from your examples.
  
