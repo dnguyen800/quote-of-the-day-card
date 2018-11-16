@@ -1,4 +1,4 @@
-class QuoteDay extends HTMLElement {
+class QuoteDayCard extends HTMLElement {
 
     constructor() {
       super();
@@ -36,22 +36,31 @@ class QuoteDay extends HTMLElement {
 
             .container {
               position: relative;
+              width: 100%;
             }
           
-          .center {
+            .center {
+              margin: auto;
+              width: 90%;
               position: absolute;
               text-align: center;
+              padding: 1px;
+
+              line-height: 1;
               top: 50%;
               left: 50%;
               transform: translate(-50%, -50%);
               color: white;
 
-          }
+            }
           
-          img { 
+            .container img { 
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
               width: 100%;
               height: auto;
-          }
+            }
             `;
              
 
@@ -79,22 +88,22 @@ class QuoteDay extends HTMLElement {
       let card_content = ''
       let quote_content = ``
       card_content += `<div class="container">
-        <img src="/local/bg.jpg">
+        <img src="/local/bg.jpg" style="width:100%">
         <div class="center">`;
        
       if (hass.states[config.entity]) {
         const quoteList = hass.states[config.entity].attributes;
-        debugger;       
+   
         for (let quote in quoteList) {
           if (quote !== "friendly_name" && quote !== "icon" && quote !== "homebridge_hidden" && !quote_content) {
-            quote_content += `  <h1 style="font-size:20px">${quoteList[quote]['summary']}</h1>`;
-            quote_content += `  <h3>${quoteList[quote]['title']}</h3>`;
-            debugger;
+            quote_content += `  <h1 style="font-size:1.3vw">${quoteList[quote]['summary']}</h1>`;
+            quote_content += `  <h3 style="font-size:0.9vw">${quoteList[quote]['title']}</h3>`;
+
           }
         }
         card_content += quote_content
         card_content += `</div></div>` 
-        debugger;
+
       };
       root.lastChild.hass = hass;
       root.getElementById('content').innerHTML = card_content;
@@ -106,4 +115,4 @@ class QuoteDay extends HTMLElement {
     }
 }
   
-customElements.define('quote-day', QuoteDay);
+customElements.define('quote-day-card', QuoteDayCard);
