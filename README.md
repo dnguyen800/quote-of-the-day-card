@@ -32,7 +32,7 @@ resources:
 5. Restart Home Assistant
  
 ## Optional
-To configure custom_updater with button-card
+To configure custom_updater with quote-of-the-day-card:
 ```yaml
 custom_updater:
   card_urls:
