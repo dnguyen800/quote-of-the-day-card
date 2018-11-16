@@ -19,7 +19,7 @@ sensor:
 
 ```yaml
 resources:
-  - url: /local/quote-day-card.js
+  - url: /local/quote-day-card.js?v=0
     type: js  
 ```
 4. Write configuration for the card in your `ui-lovelace.yaml`.
