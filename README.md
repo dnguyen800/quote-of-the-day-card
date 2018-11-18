@@ -36,7 +36,7 @@ To configure custom_updater with quote-of-the-day-card:
 ```yaml
 custom_updater:
   card_urls:
-    - https://github.com/dnguyen800/Quote-of-the-Day-Card/blob/master/tracker.json
+    - https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/tracker.json
 ```
 ## Options
 | Name | Type | Default | Description
