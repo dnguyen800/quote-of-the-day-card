@@ -1,60 +1,53 @@
 # Quote of the Day Card
-![playlist](images/quote.PNG)
+![quote](images/quote.PNG)
 
-This is a Home Assistant Lovelace card that takes your Spotify playlists and creates buttons that will start the playlist when pressed. Requires [Feed Parser sensor](https://github.com/custom-components/sensor.feedparser) setup to pull the [RSS Feed from Brainyquote.com](https://www.brainyquote.com/link/quotebr.rss).
-
-## Features
-  - Press/click on the image to start the playlist on the selected Spotify media player.
-  - specify number of columns, image size
-
-## Options
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| media_player | string | **Required** | Name of the Spotify media player in your Home Assistant instance. For example, `media_player.spotify`
-| entity| string | **Required** | Name of the Spotify Playlist sensor that holds your playlist info. For example, `sensor.playlists`
-| columns | int | '3' | Number of columns to display. Default is 3
-| size | string | '140px' | Size of playlist image. Can be listed as pixel (50px) or percentage (50%).
-| show_name | boolean | 'false' | Show playlist names. 
-| show_title | boolean | 'false' | Shows the card title. 
-| title | string | 'Playlists' | Card title.
+Quote of the Day card uses the [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) to pull quotes from Brainyquotes.com RSS feed and display them on a nice card.
 
 ## Instructions
-1. Install the [Feed Parser sensor](https://github.com/custom-components/sensor.feedparser) with the BrainyQuote RSS feed. The following configuration works:
-2.   - url: /local/spotify-playlist.js    type: module
-3. Download the [spotify-playlist-card](https://raw.githubusercontent.com/dnguyen800/Spotify-Playlist/master/spotify-playlist-card.js)
-4. Place the file in your `config/www` folder
-5. Include the card code in your `ui-lovelace-card.yaml`
+ 1. Download the [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) and use the following configuration:
+
+ ```yaml
+sensor:
+  - platform: feedparser
+    name: Quote of the Day
+    feed_url: 'https://www.brainyquote.com/link/quotebr.rss'
+    date_format: '%a, %b %d %I:%M %p'
+```
+ 2. Download the [Quote-Day-Card](https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/quote-day-card.js), [bg.jpg](https://github.com/dnguyen800/Quote-of-the-Day-Card/raw/master/images/bg.jpg) and place the files in your `config/www` folder.
+ 
+ 3. Add the following to the resources section of your ui-lovelace.yaml
+
 ```yaml
 resources:
-  - url: /local/spotify-playlist.js
-    type: module
+  - url: /local/quote-day-card.js?v=0
+    type: js  
 ```
-4. Write configuration for the card in your `ui-lovelace.yaml` and add your sensor and Spotify media player.
+4. Write configuration for the card in your `ui-lovelace.yaml`.
 
 ```yaml
-  - type: "custom:spotify-playlist"
-    entity: sensor.playlists
-    media_player: media_player.spotify
-    columns: 3
-    size: '140px'       
-    show_name: false      
-    show_title: false
-    title: 'My Playlists'   
+ - type: custom:quote-day-card               
+   entity: sensor.quote_of_the_day
 ```
 
-## FAQ
- - This card doesn't work in Fully Kiosk Browser on Amazon Fire tablets. Why?
+5. Restart Home Assistant
+ 
+## Optional
+To configure custom_updater with quote-of-the-day-card:
+```yaml
+custom_updater:
+  card_urls:
+    - https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/tracker.json
+```
+## Options
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| entity | string | **Required** | Name of the Feed Parser sensor that contains the Quote of the Day data.
 
-   This card uses a new CSS function, CSS Grid Layout, which was implemented in October 2018, and isn't compatible with browsers using old versions of Android WebView. That's my guess anyways.
-
- - I press on a playlist button but I don't hear the playlist playing.
-
- If Spotify has been inactive for some time, Spotify will not start playing on the last played device. Start playing Spotify on any device, then try pressing the playlist button again.
-
-## Support
-I am studying Python as a hobby and this is my first public project. Unfortunately, I know nothing about Javascript and relied on studying other Lovelace custom cards to write this. Suggestions are welcome but no promises if I can fix anything! If you're familiar with CSS, then you can edit the CSS style in the .js file directly!
+## To Do
+ - Display more than one quote
 
 ## Credits
-  - Background image provided by [Yannick Pulver](https://unsplash.com/@yanu) via Unsplash license
-
+ - Background image by [Yannick Pulver](https://yannickpulver.com/) via [Unsplash](https://unsplash.com/@yanu)
+ - [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) - For doing the hard work
+ - All the Home Assistant custom components and cards out there. I learned from your examples.
+ 
