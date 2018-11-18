@@ -34,12 +34,12 @@ class QuoteDayCard extends HTMLElement {
               font-family: Arial, Helvetica, sans-serif;
             }
 
-            .container {
+            .quotecontainer {
               position: relative;
               width: 100%;
             }
           
-            .center {
+            .quotecenter {
               margin: auto;
               width: 90%;
               position: absolute;
@@ -54,7 +54,7 @@ class QuoteDayCard extends HTMLElement {
 
             }
           
-            .container img { 
+            .quotecontainer img { 
               display: block;
               margin-left: auto;
               margin-right: auto;
@@ -87,9 +87,9 @@ class QuoteDayCard extends HTMLElement {
       this.myhass = hass;
       let card_content = ''
       let quote_content = ``
-      card_content += `<div class="container">
+      card_content += `<div class="quotecontainer">
         <img src="/local/bg.jpg" style="width:100%">
-        <div class="center">`;
+        <div class="quotecenter">`;
        
       if (hass.states[config.entity]) {
         const quoteList = hass.states[config.entity].attributes;
