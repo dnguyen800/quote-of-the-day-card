@@ -96,8 +96,8 @@ class QuoteDayCard extends HTMLElement {
    
         for (let quote in quoteList) {
           if (quote !== "friendly_name" && quote !== "icon" && quote !== "homebridge_hidden" && !quote_content) {
-            quote_content += `  <h1 style="font-size:1.8vw">${quoteList[quote]['summary']}</h1>`;
-            quote_content += `  <h3 style="font-size:1.3vw">${quoteList[quote]['title']}</h3>`;
+            quote_content += `  <h1 style="font-size:3.8vmin">${quoteList[quote]['summary']}</h1>`;
+            quote_content += `  <h3 style="font-size:3.3vmin">${quoteList[quote]['title']}</h3>`;
 
           }
         }
