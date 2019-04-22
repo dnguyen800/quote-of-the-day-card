@@ -1,5 +1,5 @@
 # Quote of the Day Card
-![quote](images/quote.PNG)
+![quote](images/quote.gif)
 
 Quote of the Day card uses the [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) to pull quotes from Brainyquotes.com RSS feed and display them on a nice card. Quotes are selected randomly.
 
@@ -19,7 +19,7 @@ sensor:
 
 ```yaml
 resources:
-  - url: /local/quote-day-card.js?v=0
+  - url: /local/quote-day-card.js
     type: js  
 ```
 4. Write configuration for the card in your `ui-lovelace.yaml`.
