@@ -1,3 +1,7 @@
+// Notes
+// Feedparser data loads each RSS feed data entry as an HA entity's attribute. The name of the attribute is the name of the author, like 'Oscar Wilde'.
+// The quote's data is stored as a dictionary under key 'Oscar Wilde'. Access an entry by hass.states[config.entity].attributes[author name][column name]
+
 class QuoteDayCard extends HTMLElement {
 
     constructor() {
@@ -9,6 +13,11 @@ class QuoteDayCard extends HTMLElement {
       if (!config.entity) {
         throw new Error('Please define an entity.');
       }
+
+      if (!config.image) {
+        config.image = `/local/bg.jpg`;
+      }          
+
       const root = this.shadowRoot;
       if (root.lastChild) root.removeChild(root.lastChild);
   
@@ -16,8 +25,6 @@ class QuoteDayCard extends HTMLElement {
       if (!cardConfig.title) {
         cardConfig.title = `Quote of the Day`;
       } 
-      
-    
 
 
       const card = document.createElement('ha-card');
@@ -61,6 +68,48 @@ class QuoteDayCard extends HTMLElement {
               width: 100%;
               height: auto;
             }
+
+            /*=== Trigger  ===*/
+            .animate {
+              -webkit-animation-duration: 1s;
+              animation-duration: 1s;
+              -webkit-animation-fill-mode: both;
+              animation-fill-mode: both;
+            }
+
+            /*=== Optional Delays, change values here  ===*/
+            .one {
+              -webkit-animation-delay: 0.7s;
+              -moz-animation-delay: 0.7s;
+              animation-delay: 0.7s;
+              }
+
+            /*=== Animations start here  ===*/
+            /*=== FADE IN  ===*/
+            @-webkit-keyframes fadeIn {
+              from {
+                opacity: 0;
+              }
+ 
+              to {
+                opacity: 1;
+              }
+            }
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+              }
+ 
+              to {
+                opacity: 1;
+              }
+            }
+ 
+            .fadeIn {
+              -webkit-animation-name: fadeIn;
+              animation-name: fadeIn;
+            }
+
             `;
              
 
@@ -70,7 +119,7 @@ class QuoteDayCard extends HTMLElement {
       </div>
       `;
       
-      if (config.show_title) {
+      if (cardConfig.title && !['Quote of the Day'].includes(cardConfig.title)) {
         card.header = cardConfig.title;
       }
       card.appendChild(content);
@@ -87,20 +136,46 @@ class QuoteDayCard extends HTMLElement {
       this.myhass = hass;
       let card_content = ''
       let quote_content = ``
+
+
       card_content += `<div class="quotecontainer">
-        <img src="/local/bg.jpg" style="width:100%">
-        <div class="quotecenter">`;
+        <img src="${config.image}" style="width:100%">
+        <div class="quotecenter animate fadeIn one">`;
        
       if (hass.states[config.entity]) {
         const quoteList = hass.states[config.entity].attributes;
-   
-        for (let quote in quoteList) {
-          if (quote !== "friendly_name" && quote !== "icon" && quote !== "homebridge_hidden" && !quote_content) {
-            quote_content += `  <h1 style="font-size:3.8vmin">${quoteList[quote]['summary']}</h1>`;
-            quote_content += `  <h3 style="font-size:3.3vmin">${quoteList[quote]['title']}</h3>`;
-
-          }
+        var quoteArray = [];
+        
+        // Build an array of keys while walking through quoteList dictionary.
+        // The If statement filters out common HA entity attributes like 'friendly_name', 'icon,' and 'homebridge_hidden'. Assumes remaining attributes are the RSS feed entries      
+        for (var quote in quoteList) {
+            if (quoteList.hasOwnProperty(quote) && quote !== "friendly_name" && quote !== "icon" && quote !== "homebridge_hidden") {
+                quoteArray.push(quote);
+            }
         }
+        
+
+        // Selects random quote
+        var quoteAuthor = quoteArray[quoteArray.length * Math.random() << 0];
+        var quote = quoteList[quoteAuthor]
+
+        if (!quoteList) {
+          throw new Error("Feed is !feed");
+          debugger;
+        }  
+        
+        
+        if (quoteList == undefined) {
+          throw new Error("Feed is undefined");
+          debugger;
+        } 
+
+        // If statement also checks for values in 'summary' and 'title'. 
+        if (quote['summary'].length >= 60) { quote_content += `<h2>${quote['summary']}</h2>`; } 
+        else if (quote['summary'].length >= 140) { quote_content += `<h3>${quote['summary']}</h3>`; }              
+        else { quote_content += `<h1>${quote['summary']}</h1>`; }             
+        quote_content += `<h3>${quote['title']}</h3>`;           
+
         card_content += quote_content
         card_content += `</div></div>` 
 
