@@ -1,7 +1,7 @@
 # Quote of the Day Card
 ![quote](images/quote.PNG)
 
-Quote of the Day card uses the [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) to pull quotes from Brainyquotes.com RSS feed and display them on a nice card.
+Quote of the Day card uses the [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) to pull quotes from Brainyquotes.com RSS feed and display them on a nice card. Quotes are selected randomly.
 
 ## Instructions
  1. Download the [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) and use the following configuration:
@@ -31,20 +31,12 @@ resources:
 
 5. Restart Home Assistant
  
-## Optional
-To configure custom_updater with quote-of-the-day-card:
-```yaml
-custom_updater:
-  card_urls:
-    - https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/tracker.json
-```
 ## Options
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | entity | string | **Required** | Name of the Feed Parser sensor that contains the Quote of the Day data.
+| image | string | /local/bg.jpg | If the background image is stored in a location other than /www/bg.jpg, you can input a different location here. Example: '/local/bg.jpg'
 
-## To Do
- - Display more than one quote
 
 ## Credits
  - Background image by [Yannick Pulver](https://yannickpulver.com/) via [Unsplash](https://unsplash.com/@yanu)
