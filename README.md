@@ -1,5 +1,5 @@
 # Quote of the Day Card
-![quote](images/quote.PNG)
+![quote](images/quote.gif)
 
 Quote of the Day card uses the [Feed Parser Sensor](https://github.com/custom-components/sensor.feedparser) to pull quotes from Brainyquotes.com RSS feed and display them on a nice card. Quotes are selected randomly.
 
