@@ -13,13 +13,23 @@ sensor:
     feed_url: 'https://www.brainyquote.com/link/quotebr.rss'
     date_format: '%a, %b %d %I:%M %p'
 ```
+
+## HACS Instructions
+ 2. Go to HACS settings and add the following custom repository (as plugin):
+ 
+ ```
+ https://github.com/dnguyen800/quote-of-the-day-card
+ ```
+
+## Manual Instructions
+
  2. Download the [Quote-Day-Card](https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/quote-day-card.js), [bg.jpg](https://github.com/dnguyen800/Quote-of-the-Day-Card/raw/master/images/bg.jpg) and place the files in your `config/www` folder.
  
  3. Add the following to the resources section of your ui-lovelace.yaml
 
 ```yaml
 resources:
-  - url: /local/quote-day-card.js
+  - url: /local/quote-of-the-day-card.js
     type: js  
 ```
 4. Write configuration for the card in your `ui-lovelace.yaml`.
