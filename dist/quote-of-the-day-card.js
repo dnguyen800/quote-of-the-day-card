@@ -15,7 +15,7 @@ class QuoteDayCard extends HTMLElement {
       }
 
       if (!config.image) {
-        config.image = `/local/bg.jpg`;
+        config.image = `bg.jpg`;
       }          
 
       const root = this.shadowRoot;
