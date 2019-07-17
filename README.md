@@ -23,7 +23,7 @@ sensor:
 
 ## Manual Instructions
 
- 2. Download the [Quote-Day-Card](https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/quote-day-card.js), [bg.jpg](https://github.com/dnguyen800/Quote-of-the-Day-Card/raw/master/images/bg.jpg) and place the files in your `config/www` folder.
+ 2. Download the [Quote-Day-Card](https://raw.githubusercontent.com/dnguyen800/Quote-of-the-Day-Card/master/quote-of-the-day-card.js), [bg.jpg](https://github.com/dnguyen800/quote-of-the-day-card/blob/master/dist/bg.jpg) and place the files in your `config/www` folder.
  
  3. Add the following to the resources section of your ui-lovelace.yaml
 
@@ -35,7 +35,7 @@ resources:
 4. Write configuration for the card in your `ui-lovelace.yaml`.
 
 ```yaml
- - type: custom:quote-day-card               
+ - type: custom:quote-of-the-day-card               
    entity: sensor.quote_of_the_day
 ```
 
