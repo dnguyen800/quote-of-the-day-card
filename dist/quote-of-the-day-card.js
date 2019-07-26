@@ -15,7 +15,7 @@ class QuoteOfTheDayCard extends HTMLElement {
       }
 
       if (!config.image) {
-        config.image = "https://cdn.jsdelivr.net/gh/dnguyen800/quote-of-the-day-card@0.0.2/images/bg.jpg";
+        config.image = "https://cdn.jsdelivr.net/gh/dnguyen800/quote-of-the-day-card@0.0.3/dist/images/bg.jpg";
       }          
 
       const root = this.shadowRoot;
