@@ -2,7 +2,7 @@
 // Feedparser data loads each RSS feed data entry as an HA entity's attribute. The name of the attribute is the name of the author, like 'Oscar Wilde'.
 // The quote's data is stored as a dictionary under key 'Oscar Wilde'. Access an entry by hass.states[config.entity].attributes[author name][column name]
 
-class QuoteDayCard extends HTMLElement {
+class QuoteOfTheDayCard extends HTMLElement {
 
     constructor() {
       super();
@@ -15,7 +15,7 @@ class QuoteDayCard extends HTMLElement {
       }
 
       if (!config.image) {
-        config.image = `bg.jpg`;
+        config.image = "https://cdn.jsdelivr.net/gh/dnguyen800/quote-of-the-day-card@0.0.2/images/bg.jpg";
       }          
 
       const root = this.shadowRoot;
@@ -190,4 +190,4 @@ class QuoteDayCard extends HTMLElement {
     }
 }
   
-customElements.define('quote-day-card', QuoteDayCard);
+customElements.define('quote-of-the-day-card', QuoteOfTheDayCard);
