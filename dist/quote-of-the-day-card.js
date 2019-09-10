@@ -14,6 +14,7 @@ class QuoteOfTheDayCard extends HTMLElement {
         throw new Error('Please define an entity.');
       }
 
+
       if (!config.image) {
         config.image = "https://cdn.jsdelivr.net/gh/dnguyen800/quote-of-the-day-card@0.0.3/dist/images/bg.jpg";
       }          
@@ -134,16 +135,19 @@ class QuoteOfTheDayCard extends HTMLElement {
       const root = this.shadowRoot;
       const card = root.lastChild;
       this.myhass = hass;
-      let card_content = ''
-      let quote_content = ``
+      let card_content = '';
+      let quote_content = ``;
+      const image = config.image;
+      const entity = config.entity;
+      const feed_attribute = config.feed_attribute;
 
 
       card_content += `<div class="quotecontainer">
-        <img src="${config.image}" style="width:100%">
+        <img src="${image}" style="width:100%">
         <div class="quotecenter animate fadeIn one">`;
        
-      if (hass.states[config.entity]) {
-        const quoteList = hass.states[config.entity].attributes;
+      if (hass.states[entity]) {
+        const quoteList = feed_attribute ? hass.states[entity].attributes[feed_attribute] : hass.states[entity].attributes;
         var quoteArray = [];
         
         // Build an array of keys while walking through quoteList dictionary.
