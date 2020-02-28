@@ -12,21 +12,12 @@ class QuoteOfTheDayCard extends HTMLElement {
     setConfig(config) {
       if (!config.entity) {
         throw new Error('Please define an entity.');
-      }
-
-
-      if (!config.image) {
-        config.image = "https://cdn.jsdelivr.net/gh/dnguyen800/quote-of-the-day-card@0.0.3/dist/images/bg.jpg";
-      }          
+      }      
 
       const root = this.shadowRoot;
       if (root.lastChild) root.removeChild(root.lastChild);
   
       const cardConfig = Object.assign({}, config);
-      if (!cardConfig.title) {
-        cardConfig.title = `Quote of the Day`;
-      } 
-
 
       const card = document.createElement('ha-card');
       const content = document.createElement('div');
@@ -120,9 +111,6 @@ class QuoteOfTheDayCard extends HTMLElement {
       </div>
       `;
       
-      if (cardConfig.title && !['Quote of the Day'].includes(cardConfig.title)) {
-        card.header = cardConfig.title;
-      }
       card.appendChild(content);
       card.appendChild(style);
       root.appendChild(card);
@@ -137,7 +125,7 @@ class QuoteOfTheDayCard extends HTMLElement {
       this.myhass = hass;
       let card_content = '';
       let quote_content = ``;
-      const image = config.image;
+      const image = config.image || "https://cdn.jsdelivr.net/gh/dnguyen800/quote-of-the-day-card@0.0.3/dist/images/bg.jpg";
       const entity = config.entity;
       const feed_attribute = config.feed_attribute;
 
