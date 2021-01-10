@@ -125,7 +125,7 @@ class QuoteOfTheDayCard extends HTMLElement {
       this.myhass = hass;
       let card_content = '';
       let quote_content = ``;
-      const image = config.image || "https://cdn.jsdelivr.net/gh/dnguyen800/quote-of-the-day-card@0.0.3/dist/images/bg.jpg";
+      const image = config.image || "/hacsfiles/quote-of-the-day-card/bg.jpg";
       const entity = config.entity;
       const feed_attribute = config.feed_attribute;
 
