@@ -2,10 +2,15 @@
 // Feedparser data loads each RSS feed data entry as an HA entity's attribute. The name of the attribute is the name of the author, like 'Oscar Wilde'.
 // The quote's data is stored as a dictionary under key 'Oscar Wilde'. Access an entry by hass.states[config.entity].attributes[author name][column name]
 
+
+let oldStates = {}
+
+
 class QuoteOfTheDayCard extends HTMLElement {
 
     constructor() {
       super();
+      oldStates = {}
       this.attachShadow({ mode: 'open' });
     }
   
@@ -26,6 +31,8 @@ class QuoteOfTheDayCard extends HTMLElement {
       style.textContent = `
             ha-card {
               /* sample css */
+              ha-card-box-shadow: var(--box-shadow);
+              border-radius: var(--border-radius);
             }
 
             body {
@@ -59,6 +66,8 @@ class QuoteOfTheDayCard extends HTMLElement {
               margin-right: auto;
               width: 100%;
               height: auto;
+              ha-card-box-shadow: var(--box-shadow);
+              border-radius: var(--border-radius);
             }
 
             /*=== Trigger  ===*/
@@ -117,11 +126,32 @@ class QuoteOfTheDayCard extends HTMLElement {
       this._config = cardConfig;
     }
   
- 
+    // Helper method that checks if there are any changes to the states before it refreshes the card. See @swampen PR #41 in air-visual-card
+    shouldNotUpdate(config, hass) {
+      let clone = JSON.parse(JSON.stringify(config))
+      // Here, delete any config attribute that should not be checked for updates
+      delete clone["image"]
+      delete clone["feed_attribute"]
+      delete clone["type"]
+      let states = {}
+      for (let entity of Object.values(clone)) {
+        states[entity] = hass.states[entity]
+      }
+      if (JSON.stringify(oldStates) === JSON.stringify(states)) {
+        return true
+      }
+      oldStates = states
+      return false
+    }
+
     set hass(hass) {
       const config = this._config;
       const root = this.shadowRoot;
       const card = root.lastChild;
+      if (this.shouldNotUpdate(config, hass)) {
+        return 
+      }
+
       this.myhass = hass;
       let card_content = '';
       let quote_content = ``;
